@@ -1,35 +1,68 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { Component, type ReactNode } from 'react';
 import './App.css';
+import Header from './components/Search';
+import { fetchData } from './services/api';
+import CardList from './components/CardList';
+import type { Character } from './utils/constants';
 
-function App() {
-  const [count, setCount] = useState(0);
+interface State {
+  searchText: string;
+  characters: Character[];
+  loading: boolean;
+}
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+class App extends Component<Record<string, never>, State> {
+  constructor(props: Record<string, never>) {
+    super(props);
+    this.state = {
+      searchText: localStorage.getItem('search') || '',
+      characters: [],
+      loading: true,
+    };
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleSearchSumbit = this.handleSearchSumbit.bind(this);
+  }
+
+  componentDidMount(): void {
+    this.fetchCharacters(this.state.searchText);
+  }
+
+  async fetchCharacters(search: string): Promise<void> {
+    this.setState({ loading: true });
+
+    try {
+      const data = await fetchData(search);
+      this.setState({ characters: data, loading: false });
+    } catch {
+      this.setState({ characters: [], loading: false });
+    }
+  }
+
+  handleSearchChange(search: string) {
+    this.setState({ searchText: search });
+  }
+
+  handleSearchSumbit() {
+    const { searchText } = this.state;
+    localStorage.setItem('search', searchText);
+    this.fetchCharacters(searchText);
+  }
+
+  render(): ReactNode {
+    return (
+      <>
+        <Header
+          searchText={this.state.searchText}
+          onChange={this.handleSearchChange}
+          onClick={this.handleSearchSumbit}
+        />
+        <CardList
+          characters={this.state.characters}
+          loading={this.state.loading}
+        />
+      </>
+    );
+  }
 }
 
 export default App;
