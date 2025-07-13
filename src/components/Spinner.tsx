@@ -1,0 +1,13 @@
+import { Component, type ReactNode } from 'react';
+
+class Spinner extends Component {
+  render(): ReactNode {
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center">
+        <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+      </div>
+    );
+  }
+}
+
+export default Spinner;
