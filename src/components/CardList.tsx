@@ -6,13 +6,13 @@ import { fetchData } from '../services/api';
 
 interface Props {
   searchText: string;
-  isError: boolean;
 }
 
 interface State {
   loading: boolean;
   error: string | null;
   characters: Character[];
+  isError: boolean;
 }
 
 class CardList extends Component<Props, State> {
@@ -22,6 +22,7 @@ class CardList extends Component<Props, State> {
       loading: true,
       error: null,
       characters: [],
+      isError: false,
     };
   }
 
@@ -47,6 +48,10 @@ class CardList extends Component<Props, State> {
     }
   }
 
+  throwError = (): void => {
+    this.setState({ isError: true });
+  };
+
   render(): ReactNode {
     const { loading, error, characters } = this.state;
 
@@ -58,26 +63,32 @@ class CardList extends Component<Props, State> {
       return <p>{error}</p>;
     }
 
-    if (this.props.isError) {
-      throw new Error('Test Error');
+    if (this.state.isError) {
+      throw new Error('Test Error for Results');
     }
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-        }}
-      >
-        {characters.length > 0 ? (
-          characters.map((character) => (
-            <Card key={character.id} character={character} />
-          ))
-        ) : (
-          <p>No character was found</p>
-        )}
-      </div>
+      <>
+        <button
+          className="absolute top-0 right-0 cursor-pointer rounded bg-amber-600 px-6 py-2 text-xs font-medium text-white uppercase hover:bg-amber-800"
+          onClick={this.throwError}
+        >
+          Error Results
+        </button>
+        <div>
+          {characters.length > 0 ? (
+            <div className="grid-cols-1 p-10 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {characters.map((character) => (
+                <Card key={character.id} character={character} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex w-full justify-center p-10">
+              <p>No character was found :&#40;</p>
+            </div>
+          )}
+        </div>
+      </>
     );
   }
 }

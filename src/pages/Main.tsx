@@ -6,7 +6,6 @@ import { SEARCH_KEY } from '../utils/constants';
 
 interface State {
   searchText: string;
-  isError: boolean;
 }
 
 class Main extends Component<Record<string, never>, State> {
@@ -14,7 +13,6 @@ class Main extends Component<Record<string, never>, State> {
     super(props);
     this.state = {
       searchText: localStorage.getItem(SEARCH_KEY) || '',
-      isError: false,
     };
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
@@ -23,19 +21,14 @@ class Main extends Component<Record<string, never>, State> {
     this.setState({ searchText: search });
   }
 
-  throwError = (): void => {
-    this.setState({ isError: true });
-  };
-
   render(): ReactNode {
-    const { searchText, isError } = this.state;
+    const { searchText } = this.state;
 
     return (
-      <main>
+      <main className="min-h-screen">
         <Search initialSearch={searchText} onClick={this.handleSearchSubmit} />
-        <button onClick={this.throwError}>Error</button>
         <ErrorBoundary>
-          <CardList searchText={searchText} isError={isError} />
+          <CardList searchText={searchText} />
         </ErrorBoundary>
       </main>
     );
