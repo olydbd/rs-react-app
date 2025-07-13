@@ -4,6 +4,7 @@ import Header from './components/Search';
 import { fetchData } from './services/api';
 import CardList from './components/CardList';
 import type { Character } from './utils/constants';
+import ErrorBoundary from './components/ErrorBoundary';
 
 interface State {
   searchText: string;
@@ -56,10 +57,12 @@ class App extends Component<Record<string, never>, State> {
           onChange={this.handleSearchChange}
           onClick={this.handleSearchSumbit}
         />
-        <CardList
-          characters={this.state.characters}
-          loading={this.state.loading}
-        />
+        <ErrorBoundary>
+          <CardList
+            characters={this.state.characters}
+            loading={this.state.loading}
+          />
+        </ErrorBoundary>
       </>
     );
   }
