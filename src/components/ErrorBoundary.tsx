@@ -24,15 +24,9 @@ class ErrorBoundary extends Component<Props, State> {
     console.error('Error caught by ErrorBoundary:', error, errorInfo);
   }
 
-  handleReset = (): void => {
-    this.setState({ hasError: false, error: null });
-  };
-
   render(): React.ReactNode {
     if (this.state.hasError) {
-      return (
-        <ErrorFallback error={this.state.error} onReset={this.handleReset} />
-      );
+      return <ErrorFallback error={this.state.error} />;
     }
 
     return this.props.children;

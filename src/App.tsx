@@ -1,68 +1,14 @@
 import { Component, type ReactNode } from 'react';
+import Main from './pages/Main';
 import './App.css';
-import Header from './components/Search';
-import { fetchData } from './services/api';
-import CardList from './components/CardList';
-import type { Character } from './utils/constants';
-import ErrorBoundary from './components/ErrorBoundary';
+import Header from './components/Header';
 
-interface State {
-  searchText: string;
-  characters: Character[];
-  loading: boolean;
-}
-
-class App extends Component<Record<string, never>, State> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = {
-      searchText: localStorage.getItem('search') || '',
-      characters: [],
-      loading: true,
-    };
-    this.handleSearchChange = this.handleSearchChange.bind(this);
-    this.handleSearchSumbit = this.handleSearchSumbit.bind(this);
-  }
-
-  componentDidMount(): void {
-    this.fetchCharacters(this.state.searchText);
-  }
-
-  async fetchCharacters(search: string): Promise<void> {
-    this.setState({ loading: true });
-
-    try {
-      const data = await fetchData(search);
-      this.setState({ characters: data, loading: false });
-    } catch {
-      this.setState({ characters: [], loading: false });
-    }
-  }
-
-  handleSearchChange(search: string) {
-    this.setState({ searchText: search });
-  }
-
-  handleSearchSumbit() {
-    const { searchText } = this.state;
-    localStorage.setItem('search', searchText);
-    this.fetchCharacters(searchText);
-  }
-
+class App extends Component {
   render(): ReactNode {
     return (
       <>
-        <Header
-          searchText={this.state.searchText}
-          onChange={this.handleSearchChange}
-          onClick={this.handleSearchSumbit}
-        />
-        <ErrorBoundary>
-          <CardList
-            characters={this.state.characters}
-            loading={this.state.loading}
-          />
-        </ErrorBoundary>
+        <Header />
+        <Main />
       </>
     );
   }

@@ -1,27 +1,42 @@
 import { Component, type ChangeEvent, type ReactNode } from 'react';
+import { SEARCH_KEY } from '../utils/constants';
 
 interface Props {
-  searchText: string;
-  onChange: (search: string) => void;
-  onClick: () => void;
+  initialSearch: string;
+  onClick: (search: string) => void;
 }
 
-class Header extends Component<Props> {
-  handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    this.props.onChange(e.target.value);
-  };
+interface State {
+  query: string;
+}
 
-  handleClick = (): void => {
-    this.props.onClick();
-  };
+class Search extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      query: props.initialSearch || '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleChange(e: ChangeEvent<HTMLInputElement>): void {
+    this.setState({ query: e.target.value });
+  }
+
+  handleClick(): void {
+    const searchText = this.state.query.trim();
+    this.setState({ query: searchText });
+    localStorage.setItem(SEARCH_KEY, searchText);
+    this.props.onClick(searchText);
+  }
 
   render(): ReactNode {
-    const { searchText } = this.props;
     return (
       <div>
         <input
           type="text"
-          value={searchText}
+          value={this.state.query}
           onChange={this.handleChange}
           placeholder="Search characters"
         />
@@ -31,4 +46,4 @@ class Header extends Component<Props> {
   }
 }
 
-export default Header;
+export default Search;

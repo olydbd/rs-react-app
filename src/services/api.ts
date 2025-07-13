@@ -1,4 +1,4 @@
-import type { Character } from '../utils/constants';
+import type { Character } from '../utils/types';
 
 export async function fetchData(searchText: string = ''): Promise<Character[]> {
   const text = searchText.trim();
@@ -22,6 +22,6 @@ export async function fetchData(searchText: string = ''): Promise<Character[]> {
     if (error instanceof Error) {
       throw error;
     }
-    throw new Error('Failed to fetch data');
+    throw new Error('Unknown error. Failed to fetch data.');
   }
 }

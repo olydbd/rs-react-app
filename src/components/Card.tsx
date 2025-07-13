@@ -1,5 +1,5 @@
 import { Component, type ReactNode } from 'react';
-import type { Character } from '../utils/constants';
+import type { Character } from '../utils/types';
 
 interface Props {
   character: Character;
@@ -7,12 +7,13 @@ interface Props {
 
 class Card extends Component<Props> {
   render(): ReactNode {
-    const { character } = this.props;
+    const { name, status, image } = this.props.character;
+
     return (
       <div style={{ border: '1px solid black' }}>
-        <h2>{character.name}</h2>
-        <p>{character.status}</p>
-        <img src={character.image} alt="Image" />
+        <h2>{name}</h2>
+        <p>{status}</p>
+        <img src={image} alt="Image" />
       </div>
     );
   }

@@ -1,53 +1,83 @@
 import { Component, type ReactNode } from 'react';
 import Card from './Card';
-import type { Character } from '../utils/constants';
+import type { Character } from '../utils/types';
 import Spinner from './Spinner';
+import { fetchData } from '../services/api';
 
 interface Props {
-  characters: Character[];
-  loading: boolean;
-}
-
-interface State {
+  searchText: string;
   isError: boolean;
 }
 
-class CardList extends Component<Props, State> {
-  state = {
-    isError: false,
-  };
+interface State {
+  loading: boolean;
+  error: string | null;
+  characters: Character[];
+}
 
-  throwError = (): void => {
-    this.setState({ isError: true });
-  };
+class CardList extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      loading: true,
+      error: null,
+      characters: [],
+    };
+  }
+
+  componentDidMount(): void {
+    this.fetchCharacters();
+  }
+
+  componentDidUpdate(prevProps: Readonly<Props>): void {
+    if (prevProps.searchText !== this.props.searchText) this.fetchCharacters();
+  }
+
+  async fetchCharacters(): Promise<void> {
+    this.setState({ loading: true, error: null, characters: [] });
+
+    try {
+      const data = await fetchData(this.props.searchText);
+      this.setState({ characters: data, loading: false });
+    } catch (error) {
+      this.setState({ characters: [], loading: false });
+      if (error instanceof Error) {
+        this.setState({ error: error.message });
+      }
+    }
+  }
 
   render(): ReactNode {
-    const { characters, loading } = this.props;
+    const { loading, error, characters } = this.state;
 
     if (loading) {
       return <Spinner />;
     }
 
-    if (this.state.isError) {
+    if (error) {
+      return <p>{error}</p>;
+    }
+
+    if (this.props.isError) {
       throw new Error('Test Error');
     }
 
     return (
-      <>
-        <button onClick={this.throwError}>Test Error Boundary</button>
-
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}
-        >
-          {characters.map((character) => (
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+        }}
+      >
+        {characters.length > 0 ? (
+          characters.map((character) => (
             <Card key={character.id} character={character} />
-          ))}
-        </div>
-      </>
+          ))
+        ) : (
+          <p>No character was found</p>
+        )}
+      </div>
     );
   }
 }
