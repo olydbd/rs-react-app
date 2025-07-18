@@ -11,7 +11,7 @@ class Card extends Component<Props> {
       this.props.character;
 
     return (
-      <div className="mx-3 mt-6 flex flex-col rounded-lg bg-white shadow-xl sm:shrink-0 sm:grow sm:basis-0">
+      <div className="mx-10 mt-16 flex flex-col rounded-lg bg-white shadow-xl sm:shrink-0 sm:grow sm:basis-0">
         <img className="rounded-t-lg" src={image} alt="Character Image" />
         <div className="p-6">
           <h5 className="mb-2 text-xl leading-tight font-medium">{name}</h5>

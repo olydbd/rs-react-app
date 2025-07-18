@@ -77,7 +77,7 @@ class CardList extends Component<Props, State> {
         </button>
         <div>
           {characters.length > 0 ? (
-            <div className="grid-cols-1 p-10 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div className="grid-cols-1 p-10 sm:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {characters.map((character) => (
                 <Card key={character.id} character={character} />
               ))}
