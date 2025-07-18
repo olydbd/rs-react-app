@@ -1,5 +1,5 @@
 import { Component, type ChangeEvent, type ReactNode } from 'react';
-import { SEARCH_KEY } from '../utils/constants';
+import { SEARCH_KEY } from '../../utils/constants';
 
 interface Props {
   initialSearch: string;

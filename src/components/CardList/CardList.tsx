@@ -1,8 +1,8 @@
 import { Component, type ReactNode } from 'react';
-import Card from './Card';
-import type { Character } from '../utils/types';
-import Spinner from './Spinner';
-import { fetchData } from '../services/api';
+import Card from '../Card/Card';
+import type { Character } from '../../utils/types';
+import Spinner from '../ui/Spinner';
+import { fetchData } from '../../services/api';
 
 interface Props {
   searchText: string;

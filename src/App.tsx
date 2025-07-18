@@ -1,6 +1,6 @@
 import { Component, type ReactNode } from 'react';
-import Main from './pages/Main';
-import Header from './components/Header';
+import Main from './pages/Main/Main';
+import Header from './components/Header/Header';
 
 class App extends Component {
   state = {

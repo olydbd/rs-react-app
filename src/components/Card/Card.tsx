@@ -1,5 +1,5 @@
 import { Component, type ReactNode } from 'react';
-import type { Character } from '../utils/types';
+import type { Character } from '../../utils/types';
 
 interface Props {
   character: Character;

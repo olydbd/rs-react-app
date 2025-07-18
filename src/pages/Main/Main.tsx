@@ -1,8 +1,8 @@
 import { Component, type ReactNode } from 'react';
-import Search from '../components/Search';
-import ErrorBoundary from '../components/ErrorBoundary';
-import CardList from '../components/CardList';
-import { SEARCH_KEY } from '../utils/constants';
+import Search from '../../components/Search/Search';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import CardList from '../../components/CardList/CardList';
+import { SEARCH_KEY } from '../../utils/constants';
 
 interface State {
   searchText: string;
