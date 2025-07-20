@@ -43,13 +43,13 @@ class Search extends Component<Props, State> {
       <form onSubmit={this.handleSubmit} className="relative mx-auto max-w-sm">
         <input
           type="text"
-          className="ease w-full rounded-full border border-slate-200 bg-transparent py-4 pr-10 pl-5 text-sm text-slate-700 shadow-sm transition duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-400 focus:shadow focus:outline-none"
+          className="ease w-full rounded-full border border-slate-200 bg-transparent py-4 pr-10 pl-5 text-sm text-slate-700 shadow-sm transition duration-300 placeholder:text-slate-400 hover:border-slate-300 focus:border-[#42B4CA] focus:shadow focus:outline-none"
           placeholder="Search character"
           value={this.state.query}
           onChange={this.handleChange}
         />
         <button
-          className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer rounded-full border border-transparent bg-[#b2daed] p-3 text-center text-sm text-white shadow-sm transition-all hover:bg-[#6391a6] hover:shadow"
+          className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer rounded-full border border-transparent bg-[#42B4CA] p-3 text-center text-sm text-white shadow-sm transition-all hover:bg-[#1196aa] hover:shadow"
           type="submit"
         >
           <SearchButtonIcon />

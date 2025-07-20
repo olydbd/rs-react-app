@@ -25,10 +25,10 @@ class Card extends Component<Props> {
           </div>
         </div>
         <div className="mt-auto flex justify-between gap-1 px-6 py-3">
-          <div className="mb-1 rounded-full border border-transparent bg-fuchsia-900 px-2.5 py-1 text-center text-xs text-white shadow-sm transition-all">
+          <div className="mb-1 rounded-full border border-transparent bg-[#42B4CA] px-2.5 py-1 text-center text-xs text-white shadow-sm transition-all">
             {status}
           </div>
-          <div className="mb-1 rounded-full border border-transparent bg-cyan-600 px-2.5 py-1 text-center text-xs text-white shadow-sm transition-all">
+          <div className="mb-1 rounded-full border border-transparent bg-[#193840] px-2.5 py-1 text-center text-xs text-white shadow-sm transition-all">
             {species}
           </div>
         </div>
