@@ -10,7 +10,7 @@ const character = {
   species: 'Human',
   origin: { name: 'Earth (C-137)', url: '' },
   location: { name: 'Citadel of Ricks', url: '' },
-  image: '',
+  image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
 };
 
 const incompleteCharacter = {
@@ -20,7 +20,7 @@ const incompleteCharacter = {
   species: '',
   origin: { name: '', url: '' },
   location: { name: '', url: '' },
-  image: '',
+  image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
 };
 
 describe('Card Component', () => {

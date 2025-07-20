@@ -22,7 +22,7 @@ const characters: Character[] = [
     species: 'Human',
     origin: { name: '', url: '' },
     location: { name: '', url: '' },
-    image: '',
+    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const characters: Character[] = [
     species: 'Human',
     origin: { name: '', url: '' },
     location: { name: '', url: '' },
-    image: '',
+    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
   },
 ];
 
@@ -43,7 +43,7 @@ const emptyCharacters: Character[] = [
     species: '',
     origin: { name: '', url: '' },
     location: { name: '', url: '' },
-    image: '',
+    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
   },
 ];
 
