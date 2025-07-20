@@ -58,7 +58,7 @@ class Main extends Component<Record<string, never>, State> {
     const { searchText, characters, loading, error } = this.state;
 
     return (
-      <main className="min-h-screen">
+      <main>
         <Search initialSearch={searchText} onClick={this.handleSearchSubmit} />
         <ErrorBoundary>
           <CardList characters={characters} loading={loading} error={error} />

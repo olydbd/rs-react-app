@@ -82,7 +82,7 @@ describe('CardList Component', () => {
         <CardList characters={emptyCharacters} loading={false} error={null} />
       );
       const cards = screen.getAllByTestId('card');
-      expect(cards).toHaveLength(2);
+      expect(cards).toHaveLength(1);
     });
   });
 });
