@@ -1,7 +1,7 @@
 import { Component, type ReactNode } from 'react';
 import Card from '../Card/Card';
 import type { Character } from '../../utils/types';
-import Spinner from '../ui/Spinner';
+import Spinner from '../ui/Spinner/Spinner';
 import { fetchData } from '../../services/api';
 
 interface Props {

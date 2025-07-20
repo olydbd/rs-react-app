@@ -50,7 +50,7 @@ class Search extends Component<Props, State> {
         />
         <button
           className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer rounded-full border border-transparent bg-[#b2daed] p-3 text-center text-sm text-white shadow-sm transition-all hover:bg-[#6391a6] hover:shadow"
-          type="button"
+          type="submit"
         >
           <SearchButtonIcon />
         </button>
