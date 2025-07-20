@@ -1,0 +1,26 @@
+import { beforeAll, afterAll, afterEach, describe, expect, it } from 'vitest';
+import { fetchData } from './api';
+import { server } from '../__tests__/mocks/node';
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+describe('API Integration Tests', () => {
+  it('return characters array on success', async () => {
+    const result = await fetchData('Rick');
+    expect(result).toHaveLength(1);
+    expect(result[0].name).toBe('Rick Sanchez');
+  });
+
+  it('return empty array on 404 status code', async () => {
+    const result = await fetchData('NonExistent');
+    expect(result).toEqual([]);
+  });
+
+  it('throws an error on 500 status code', async () => {
+    await expect(fetchData('ServerError')).rejects.toThrow(
+      'HTTP Error. Status: 500'
+    );
+  });
+});
