@@ -86,5 +86,25 @@ describe('Error Boundary', () => {
       const fallback = screen.getByRole('fallback');
       expect(fallback).toBeInTheDocument();
     });
+
+    it('resets error state and renders children after reset', async () => {
+      render(
+        <ErrorBoundary>
+          <ErrorButton />
+        </ErrorBoundary>,
+      );
+
+      const button = screen.getByRole('button');
+      await userEvent.click(button);
+
+      const fallback = screen.getByRole('fallback');
+      expect(fallback).toBeInTheDocument();
+
+      const tryAgainButton = screen.getByRole('button', { name: /Try Again/i });
+      await userEvent.click(tryAgainButton);
+
+      expect(screen.queryByRole('fallback')).not.toBeInTheDocument();
+      expect(screen.getByRole('button')).toBeInTheDocument();
+    });
   });
 });
