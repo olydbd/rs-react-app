@@ -17,12 +17,11 @@ class Main extends Component<Record<string, never>, State> {
   constructor(props: Record<string, never>) {
     super(props);
     this.state = {
-      searchText: localStorage.getItem(SEARCH_KEY) || '',
+      searchText: localStorage.getItem(SEARCH_KEY) ?? '',
       characters: [],
       loading: false,
       error: null,
     };
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
   componentDidMount(): void {
@@ -38,9 +37,9 @@ class Main extends Component<Record<string, never>, State> {
     }
   }
 
-  handleSearchSubmit(search: string) {
+  handleSearchSubmit = (search: string): void => {
     this.setState({ searchText: search });
-  }
+  };
 
   async fetchCharacters(searchText: string): Promise<void> {
     this.setState({ loading: true, error: null });

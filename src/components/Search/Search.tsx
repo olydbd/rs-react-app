@@ -22,21 +22,19 @@ class Search extends Component<Props, State> {
     this.state = {
       query: props.initialSearch || '',
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e: ChangeEvent<HTMLInputElement>): void {
+  handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     this.setState({ query: e.target.value });
-  }
+  };
 
-  handleSubmit(e: FormEvent<HTMLFormElement>): void {
+  handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const searchText = this.state.query.trim();
     this.setState({ query: searchText });
     localStorage.setItem(SEARCH_KEY, searchText);
     this.props.onClick(searchText);
-  }
+  };
 
   render(): ReactNode {
     return (
