@@ -79,7 +79,7 @@ describe('CardList Component', () => {
 
     it('handles missing or undefined data gracefully', async () => {
       render(
-        <CardList characters={emptyCharacters} loading={false} error={null} />
+        <CardList characters={emptyCharacters} loading={false} error={null} />,
       );
       const cards = screen.getAllByTestId('card');
       expect(cards).toHaveLength(1);

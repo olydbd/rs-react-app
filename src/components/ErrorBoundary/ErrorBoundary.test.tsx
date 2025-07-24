@@ -42,7 +42,7 @@ describe('Error Boundary', () => {
       render(
         <ErrorBoundary>
           <ThrowErrorComponent />
-        </ErrorBoundary>
+        </ErrorBoundary>,
       );
 
       expect(screen.getByText('Test error')).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('Error Boundary', () => {
       render(
         <ErrorBoundary>
           <ThrowErrorComponent />
-        </ErrorBoundary>
+        </ErrorBoundary>,
       );
 
       expect(console.error).toHaveBeenCalled();
@@ -64,7 +64,7 @@ describe('Error Boundary', () => {
       render(
         <ErrorBoundary>
           <ErrorButton />
-        </ErrorBoundary>
+        </ErrorBoundary>,
       );
 
       const button = screen.getByRole('button');
@@ -77,7 +77,7 @@ describe('Error Boundary', () => {
       render(
         <ErrorBoundary>
           <ErrorButton />
-        </ErrorBoundary>
+        </ErrorBoundary>,
       );
 
       const button = screen.getByRole('button');

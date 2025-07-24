@@ -20,7 +20,7 @@ describe('API Integration Tests', () => {
 
   it('throws an error on 500 status code', async () => {
     await expect(fetchData('ServerError')).rejects.toThrow(
-      'HTTP Error. Status: 500'
+      'HTTP Error. Status: 500',
     );
   });
 });

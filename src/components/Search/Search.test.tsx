@@ -31,11 +31,11 @@ describe('Search Component', () => {
         <Search
           initialSearch={localStorage.getItem(SEARCH_KEY) || ''}
           onClick={fn}
-        />
+        />,
       );
 
       const input = screen.getByPlaceholderText(
-        /Search character/i
+        /Search character/i,
       ) as HTMLInputElement;
       expect(input.value).toBe('Rick');
     });
@@ -47,11 +47,11 @@ describe('Search Component', () => {
         <Search
           initialSearch={localStorage.getItem(SEARCH_KEY) || ''}
           onClick={fn}
-        />
+        />,
       );
 
       const input = screen.getByPlaceholderText(
-        /Search character/i
+        /Search character/i,
       ) as HTMLInputElement;
       expect(input.value).toBe('');
     });
@@ -61,7 +61,7 @@ describe('Search Component', () => {
     it('updates input value when user types', async () => {
       render(<Search initialSearch="" onClick={fn} />);
       const input = screen.getByPlaceholderText(
-        /Search character/i
+        /Search character/i,
       ) as HTMLInputElement;
 
       await userEvent.type(input, 'Poopybutthole');
@@ -72,7 +72,7 @@ describe('Search Component', () => {
       render(<Search initialSearch="" onClick={fn} />);
 
       const input = screen.getByPlaceholderText(
-        /Search character/i
+        /Search character/i,
       ) as HTMLInputElement;
       const button = screen.getByRole('button');
 
@@ -86,7 +86,7 @@ describe('Search Component', () => {
       render(<Search initialSearch="" onClick={fn} />);
 
       const input = screen.getByPlaceholderText(
-        /Search character/i
+        /Search character/i,
       ) as HTMLInputElement;
       const button = screen.getByRole('button');
 
@@ -100,7 +100,7 @@ describe('Search Component', () => {
       render(<Search initialSearch="" onClick={fn} />);
 
       const input = screen.getByPlaceholderText(
-        /Search character/i
+        /Search character/i,
       ) as HTMLInputElement;
       const button = screen.getByRole('button');
 
@@ -118,7 +118,7 @@ describe('Search Component', () => {
       render(<Search initialSearch="Morty" onClick={fn} />);
 
       const input = screen.getByPlaceholderText(
-        /Search character/i
+        /Search character/i,
       ) as HTMLInputElement;
       const button = screen.getByRole('button');
 

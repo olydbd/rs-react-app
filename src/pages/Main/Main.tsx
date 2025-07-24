@@ -31,7 +31,7 @@ class Main extends Component<Record<string, never>, State> {
 
   componentDidUpdate(
     _: Readonly<Record<string, never>>,
-    prevState: Readonly<State>
+    prevState: Readonly<State>,
   ): void {
     if (prevState.searchText !== this.state.searchText) {
       this.fetchCharacters(this.state.searchText);
