@@ -14,7 +14,7 @@ const characters: Character[] = [
 ];
 
 export const handlers = [
-  http.get('https://rickandmortyapi.com/api/character/', ({ request }) => {
+  http.get('https://rickandmortyapi.com/api/character', ({ request }) => {
     const url = new URL(request.url);
     const name = url.searchParams.get('name');
 
