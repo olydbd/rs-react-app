@@ -1,5 +1,4 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
-import { SEARCH_KEY } from '../../utils/constants';
 import SearchButtonIcon from '../ui/icons/SearchButton';
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
 
 export default function Search(props: Props) {
   const { initialSearch, onClick } = props;
-  const [query, setQuery] = useState(initialSearch || '');
+  const [query, setQuery] = useState(initialSearch);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setQuery(e.target.value);
@@ -19,7 +18,6 @@ export default function Search(props: Props) {
     e.preventDefault();
     const searchText = query.trim();
     setQuery(searchText);
-    localStorage.setItem(SEARCH_KEY, searchText);
     onClick(searchText);
   };
 

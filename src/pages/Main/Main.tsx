@@ -5,11 +5,10 @@ import CardList from '../../components/CardList/CardList';
 import { SEARCH_KEY } from '../../utils/constants';
 import type { Character } from '../../utils/types';
 import { fetchData } from '../../services/api';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 export default function Main() {
-  const [searchText, setSearchText] = useState(
-    localStorage.getItem(SEARCH_KEY) ?? '',
-  );
+  const [searchText, setSearchText] = useLocalStorage(SEARCH_KEY, '');
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,12 +21,12 @@ export default function Main() {
       try {
         const data = await fetchData(searchText);
         setCharacters(data);
-        setLoading(false);
       } catch (error) {
         const message =
           error instanceof Error ? error.message : 'Unknown error';
         setError(message);
         setCharacters([]);
+      } finally {
         setLoading(false);
       }
     },
