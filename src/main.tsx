@@ -1,8 +1,27 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App.tsx';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.tsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Root from './routes/root.tsx';
+import Main from './routes/Main/Main.tsx';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <ErrorBoundary>
+        <Root />
+      </ErrorBoundary>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Main />,
+      },
+    ],
+  },
+]);
 
 const root = document.getElementById('root');
 
@@ -12,8 +31,6 @@ if (!root) {
 
 createRoot(root).render(
   <StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
+    <RouterProvider router={router} />
   </StrictMode>,
 );
