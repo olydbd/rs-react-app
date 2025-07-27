@@ -10,10 +10,6 @@ vi.mock('../Card/Card', () => ({
   ),
 }));
 
-vi.mock('../ui/Spinner/Spinner', () => ({
-  default: () => <div role="status" aria-label="Loading..." />,
-}));
-
 const characters: Character[] = [
   {
     id: 1,
@@ -54,40 +50,26 @@ describe('CardList Component', () => {
 
   describe('Rendering Tests', () => {
     it('renders correct number of items when data is provided', () => {
-      render(<CardList characters={characters} loading={false} error={null} />);
+      render(<CardList characters={characters} />);
       const cards = screen.getAllByRole('article');
       expect(cards).toHaveLength(characters.length);
     });
 
     it("displays 'no results' message when data array is empty", () => {
-      render(<CardList characters={[]} loading={false} error={null} />);
+      render(<CardList characters={[]} />);
       expect(screen.getByText('No character was found :(')).toBeVisible();
-    });
-
-    it('shows loading state while fetching data', () => {
-      render(<CardList characters={[]} loading={true} error={null} />);
-      expect(screen.getByRole('status')).toBeVisible();
-    });
-
-    it('displays error message when error occurs', () => {
-      render(
-        <CardList characters={[]} loading={false} error="Error occurred" />,
-      );
-      expect(screen.getByText('Error occurred')).toBeVisible();
     });
   });
 
   describe('Data Display Tests', () => {
     it('correctly displays item names and descriptions', () => {
-      render(<CardList characters={characters} loading={false} error={null} />);
+      render(<CardList characters={characters} />);
       expect(screen.getByText('Rick Sanchez')).toBeVisible();
       expect(screen.getByText('Black Rick')).toBeVisible();
     });
 
     it('handles missing or undefined data gracefully', () => {
-      render(
-        <CardList characters={emptyCharacters} loading={false} error={null} />,
-      );
+      render(<CardList characters={emptyCharacters} />);
       const cards = screen.getAllByRole('article');
       expect(cards).toHaveLength(emptyCharacters.length);
     });
