@@ -1,32 +1,11 @@
 import Card from '../Card/Card';
 import type { Character } from '../../utils/types';
-import Spinner from '../ui/Spinner/Spinner';
 
 interface Props {
   characters: Character[];
-  loading: boolean;
-  error: string | null;
 }
 
-export default function CardList(props: Props) {
-  const { characters, loading, error } = props;
-
-  if (loading) {
-    return (
-      <div className="flex w-full justify-center p-10">
-        <Spinner />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center p-10">
-        <p>{error}</p>
-      </div>
-    );
-  }
-
+export default function CardList({ characters }: Props) {
   if (characters.length === 0) {
     return (
       <div className="flex justify-center p-10">

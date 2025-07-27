@@ -22,7 +22,7 @@ export default function Main() {
       <div>
         <Search initialSearch={searchText} onClick={handleSearch} />
         <ErrorBoundary>
-          <CardList characters={characters} loading={false} error={null} />
+          <CardList characters={characters} />
           {pages > 1 && <Pagination current={page} total={pages} />}
         </ErrorBoundary>
       </div>
