@@ -6,6 +6,7 @@ import type { Character } from '../../utils/types';
 import { fetchData } from '../../services/api';
 import { SEARCH_KEY } from '../../utils/constants';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 vi.mock('../../components/Search/Search', () => ({
   default: ({
@@ -73,25 +74,35 @@ describe('Main Component', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.clearAllMocks();
-    vi.mocked(fetchData).mockResolvedValue(characters);
+    vi.mocked(fetchData).mockResolvedValue({ results: characters, pages: 1 });
   });
+
+  const renderWithRouter = (url = '/?page=1') => {
+    return render(
+      <MemoryRouter initialEntries={[url]}>
+        <Routes>
+          <Route path="/" element={<Main />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+  };
 
   describe('Integration Tests', () => {
     it('makes initial API call on component mount', async () => {
-      render(<Main />);
+      renderWithRouter('/?page=1');
 
       await waitFor(() => {
-        expect(fetchData).toHaveBeenCalledWith('');
+        expect(fetchData).toHaveBeenCalledWith('', 1);
       });
     });
 
     it('handles search term from localStorage on initial load', async () => {
       localStorage.setItem(SEARCH_KEY, 'Rick');
 
-      render(<Main />);
+      renderWithRouter('/?page=1');
 
       await waitFor(() => {
-        expect(fetchData).toHaveBeenCalledWith('Rick');
+        expect(fetchData).toHaveBeenCalledWith('Rick', 1);
       });
 
       expect(screen.getByTestId('search-input')).toHaveValue('Rick');
@@ -100,18 +111,18 @@ describe('Main Component', () => {
 
   describe('API Integration Tests', () => {
     it('calls API with correct parameters', async () => {
-      render(<Main />);
+      renderWithRouter('/?page=2');
 
       const searchButton = screen.getByTestId('search-button');
       await userEvent.click(searchButton);
 
       await waitFor(() => {
-        expect(fetchData).toHaveBeenCalledWith('test');
+        expect(fetchData).toHaveBeenCalledWith('test', 2);
       });
     });
 
     it('handles successful API responses', async () => {
-      render(<Main />);
+      renderWithRouter('/?page=1');
 
       await waitFor(() => {
         expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
@@ -122,7 +133,7 @@ describe('Main Component', () => {
       const errorMessage = 'API Error!';
       vi.mocked(fetchData).mockRejectedValueOnce(new Error(errorMessage));
 
-      render(<Main />);
+      renderWithRouter('/?page=1');
 
       await waitFor(() => {
         expect(screen.getByTestId('error')).toHaveTextContent(errorMessage);

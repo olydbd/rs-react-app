@@ -53,13 +53,13 @@ describe('CardList Component', () => {
   });
 
   describe('Rendering Tests', () => {
-    it('renders correct number of items when data is provided', async () => {
+    it('renders correct number of items when data is provided', () => {
       render(<CardList characters={characters} loading={false} error={null} />);
       const cards = screen.getAllByRole('article');
       expect(cards).toHaveLength(characters.length);
     });
 
-    it("displays 'no results' message when data array is empty", async () => {
+    it("displays 'no results' message when data array is empty", () => {
       render(<CardList characters={[]} loading={false} error={null} />);
       expect(screen.getByText('No character was found :(')).toBeVisible();
     });
@@ -78,13 +78,13 @@ describe('CardList Component', () => {
   });
 
   describe('Data Display Tests', () => {
-    it('correctly displays item names and descriptions', async () => {
+    it('correctly displays item names and descriptions', () => {
       render(<CardList characters={characters} loading={false} error={null} />);
       expect(screen.getByText('Rick Sanchez')).toBeVisible();
       expect(screen.getByText('Black Rick')).toBeVisible();
     });
 
-    it('handles missing or undefined data gracefully', async () => {
+    it('handles missing or undefined data gracefully', () => {
       render(
         <CardList characters={emptyCharacters} loading={false} error={null} />,
       );

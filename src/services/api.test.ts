@@ -8,14 +8,14 @@ afterAll(() => server.close());
 
 describe('API Integration Tests', () => {
   it('return characters array on success', async () => {
-    const result = await fetchData('Rick');
-    expect(result).toHaveLength(1);
-    expect(result[0].name).toBe('Rick Sanchez');
+    const { results } = await fetchData('Rick');
+    expect(results).toHaveLength(1);
+    expect(results[0].name).toBe('Rick Sanchez');
   });
 
   it('return empty array on 404 status code', async () => {
-    const result = await fetchData('NonExistent');
-    expect(result).toEqual([]);
+    const { results } = await fetchData('NonExistent');
+    expect(results).toEqual([]);
   });
 
   it('throws an error on 500 status code', async () => {

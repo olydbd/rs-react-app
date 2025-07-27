@@ -20,6 +20,7 @@ export const handlers = [
 
     if (name === 'Rick') {
       return HttpResponse.json({
+        info: { pages: 1 },
         results: characters,
       });
     }
@@ -32,6 +33,9 @@ export const handlers = [
       return new HttpResponse(null, { status: 500 });
     }
 
-    return HttpResponse.json({ results: [] });
+    return HttpResponse.json({
+      info: { pages: 1 },
+      results: [],
+    });
   }),
 ];
