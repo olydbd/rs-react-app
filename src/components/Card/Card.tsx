@@ -1,17 +1,24 @@
-import { Component, type ReactNode } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import type { Character } from '../../utils/types';
 
 interface Props {
   character: Character;
 }
 
-class Card extends Component<Props> {
-  render(): ReactNode {
-    const { name, status, species, origin, location, image } =
-      this.props.character;
+export default function Card(props: Props) {
+  const { id, name, status, species, origin, location, image } =
+    props.character;
 
-    return (
-      <div className="mx-10 mt-16 flex flex-col rounded-lg bg-white shadow-xl sm:shrink-0 sm:grow sm:basis-0">
+  const [searchParams] = useSearchParams();
+
+  return (
+    <div className="mx-10 mt-16 flex flex-col rounded-lg bg-white shadow-xl sm:shrink-0 sm:grow sm:basis-0">
+      <Link
+        to={{
+          pathname: `/characters/${id}`,
+          search: searchParams.toString(),
+        }}
+      >
         <img className="rounded-t-lg" src={image} alt="Character Image" />
         <div className="p-6">
           <h5 className="mb-2 text-xl leading-tight font-medium">{name}</h5>
@@ -32,9 +39,7 @@ class Card extends Component<Props> {
             {species}
           </div>
         </div>
-      </div>
-    );
-  }
+      </Link>
+    </div>
+  );
 }
-
-export default Card;

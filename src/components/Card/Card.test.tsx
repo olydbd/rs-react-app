@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Card from './Card';
 import { describe, it, expect } from 'vitest';
 import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 const character = {
   id: 1,
@@ -26,19 +27,27 @@ const incompleteCharacter = {
 describe('Card Component', () => {
   describe('Rendering Tests', () => {
     it('displays item name and description correctly', () => {
-      render(<Card character={character} />);
+      render(
+        <MemoryRouter>
+          <Card character={character} />
+        </MemoryRouter>,
+      );
 
-      expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
-      expect(screen.getByText('Alive')).toBeInTheDocument();
-      expect(screen.getByText('Human')).toBeInTheDocument();
-      expect(screen.getByText('Earth (C-137)')).toBeInTheDocument();
-      expect(screen.getByText('Citadel of Ricks')).toBeInTheDocument();
+      expect(screen.getByText('Rick Sanchez')).toBeVisible();
+      expect(screen.getByText('Alive')).toBeVisible();
+      expect(screen.getByText('Human')).toBeVisible();
+      expect(screen.getByText('Earth (C-137)')).toBeVisible();
+      expect(screen.getByText('Citadel of Ricks')).toBeVisible();
       const img = screen.getByAltText('Character Image') as HTMLImageElement;
       expect(img.src).toBe(character.image);
     });
 
     it('handles missing props gracefully', () => {
-      render(<Card character={incompleteCharacter} />);
+      render(
+        <MemoryRouter>
+          <Card character={incompleteCharacter} />
+        </MemoryRouter>,
+      );
 
       expect(screen.getByText('Evil Morty')).toBeInTheDocument();
     });

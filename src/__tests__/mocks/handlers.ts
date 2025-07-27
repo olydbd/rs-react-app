@@ -14,12 +14,13 @@ const characters: Character[] = [
 ];
 
 export const handlers = [
-  http.get('https://rickandmortyapi.com/api/character/', ({ request }) => {
+  http.get('https://rickandmortyapi.com/api/character', ({ request }) => {
     const url = new URL(request.url);
     const name = url.searchParams.get('name');
 
     if (name === 'Rick') {
       return HttpResponse.json({
+        info: { pages: 1 },
         results: characters,
       });
     }
@@ -32,6 +33,25 @@ export const handlers = [
       return new HttpResponse(null, { status: 500 });
     }
 
-    return HttpResponse.json({ results: [] });
+    return HttpResponse.json({
+      info: { pages: 1 },
+      results: [],
+    });
+  }),
+
+  http.get('https://rickandmortyapi.com/api/character/:id', ({ params }) => {
+    const { id } = params;
+
+    const character = characters.find((c) => c.id.toString() === id);
+
+    if (id === '500') {
+      return new HttpResponse(null, { status: 500 });
+    }
+
+    if (!character) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    return HttpResponse.json(character);
   }),
 ];

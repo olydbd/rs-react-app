@@ -6,12 +6,8 @@ import type { Character } from '../../utils/types';
 
 vi.mock('../Card/Card', () => ({
   default: ({ character }: { character: Character }) => (
-    <div data-testid="card">{character.name}</div>
+    <div role="article">{character.name}</div>
   ),
-}));
-
-vi.mock('../ui/Spinner/Spinner', () => ({
-  default: () => <div data-testid="spinner">Loading...</div>,
 }));
 
 const characters: Character[] = [
@@ -53,36 +49,29 @@ describe('CardList Component', () => {
   });
 
   describe('Rendering Tests', () => {
-    it('renders correct number of items when data is provided', async () => {
-      render(<CardList characters={characters} loading={false} error={null} />);
-      const cards = screen.getAllByTestId('card');
-      expect(cards).toHaveLength(2);
+    it('renders correct number of items when data is provided', () => {
+      render(<CardList characters={characters} />);
+      const cards = screen.getAllByRole('article');
+      expect(cards).toHaveLength(characters.length);
     });
 
-    it("displays 'no results' message when data array is empty", async () => {
-      render(<CardList characters={[]} loading={false} error={null} />);
-      expect(screen.getByText('No character was found :(')).toBeInTheDocument();
-    });
-
-    it('shows loading state while fetching data', () => {
-      render(<CardList characters={[]} loading={true} error={null} />);
-      expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    it("displays 'no results' message when data array is empty", () => {
+      render(<CardList characters={[]} />);
+      expect(screen.getByText('No character was found :(')).toBeVisible();
     });
   });
 
   describe('Data Display Tests', () => {
-    it('correctly displays item names and descriptions', async () => {
-      render(<CardList characters={characters} loading={false} error={null} />);
-      expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
-      expect(screen.getByText('Black Rick')).toBeInTheDocument();
+    it('correctly displays item names and descriptions', () => {
+      render(<CardList characters={characters} />);
+      expect(screen.getByText('Rick Sanchez')).toBeVisible();
+      expect(screen.getByText('Black Rick')).toBeVisible();
     });
 
-    it('handles missing or undefined data gracefully', async () => {
-      render(
-        <CardList characters={emptyCharacters} loading={false} error={null} />
-      );
-      const cards = screen.getAllByTestId('card');
-      expect(cards).toHaveLength(1);
+    it('handles missing or undefined data gracefully', () => {
+      render(<CardList characters={emptyCharacters} />);
+      const cards = screen.getAllByRole('article');
+      expect(cards).toHaveLength(emptyCharacters.length);
     });
   });
 });
