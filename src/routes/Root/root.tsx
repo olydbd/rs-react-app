@@ -1,7 +1,7 @@
 import { Outlet, useNavigation } from 'react-router-dom';
-import Header from '../components/Header/Header';
-import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
-import Spinner from '../components/ui/Spinner/Spinner';
+import Header from '../../components/Header/Header';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import Spinner from '../../components/ui/Spinner/Spinner';
 
 export default function Root() {
   const navigation = useNavigation();

@@ -1,12 +1,11 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import Main from './Main';
 import '@testing-library/jest-dom';
 import type { Character } from '../../utils/types';
-import { fetchData } from '../../services/api';
 import { SEARCH_KEY } from '../../utils/constants';
-import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 vi.mock('../../components/Search/Search', () => ({
   default: ({
@@ -26,18 +25,8 @@ vi.mock('../../components/Search/Search', () => ({
 }));
 
 vi.mock('../../components/CardList/CardList', () => ({
-  default: ({
-    characters,
-    loading,
-    error,
-  }: {
-    characters: Character[];
-    loading: boolean;
-    error: string | null;
-  }) => (
+  default: ({ characters }: { characters: Character[] }) => (
     <div>
-      {loading && <div data-testid="loading">Loading...</div>}
-      {error && <div data-testid="error">{error}</div>}
       {characters.map((character) => (
         <div key={character.id}>{character.name}</div>
       ))}
@@ -45,9 +34,13 @@ vi.mock('../../components/CardList/CardList', () => ({
   ),
 }));
 
-vi.mock('../../services/api', () => ({
-  fetchData: vi.fn(),
-}));
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useLoaderData: vi.fn(),
+  };
+});
 
 const characters: Character[] = [
   {
@@ -74,7 +67,6 @@ describe('Main Component', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.clearAllMocks();
-    vi.mocked(fetchData).mockResolvedValue({ results: characters, pages: 1 });
   });
 
   const renderWithRouter = (url = '/?page=1') => {
@@ -88,56 +80,30 @@ describe('Main Component', () => {
   };
 
   describe('Integration Tests', () => {
-    it('makes initial API call on component mount', async () => {
-      renderWithRouter('/?page=1');
-
-      await waitFor(() => {
-        expect(fetchData).toHaveBeenCalledWith('', 1);
+    it('loads characters from loader and shows them', () => {
+      (useLoaderData as ReturnType<typeof vi.fn>).mockReturnValue({
+        characters,
+        pages: 1,
+        page: 1,
       });
+
+      renderWithRouter();
+
+      expect(screen.getByText('Rick Sanchez')).toBeVisible();
     });
 
-    it('handles search term from localStorage on initial load', async () => {
+    it('reads search from localStorage', async () => {
       localStorage.setItem(SEARCH_KEY, 'Rick');
 
-      renderWithRouter('/?page=1');
-
-      await waitFor(() => {
-        expect(fetchData).toHaveBeenCalledWith('Rick', 1);
+      (useLoaderData as ReturnType<typeof vi.fn>).mockReturnValue({
+        characters,
+        pages: 1,
+        page: 1,
       });
+
+      renderWithRouter();
 
       expect(screen.getByTestId('search-input')).toHaveValue('Rick');
-    });
-  });
-
-  describe('API Integration Tests', () => {
-    it('calls API with correct parameters', async () => {
-      renderWithRouter('/?page=2');
-
-      const searchButton = screen.getByTestId('search-button');
-      await userEvent.click(searchButton);
-
-      await waitFor(() => {
-        expect(fetchData).toHaveBeenCalledWith('test', 2);
-      });
-    });
-
-    it('handles successful API responses', async () => {
-      renderWithRouter('/?page=1');
-
-      await waitFor(() => {
-        expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
-      });
-    });
-
-    it('handles API error responses', async () => {
-      const errorMessage = 'API Error!';
-      vi.mocked(fetchData).mockRejectedValueOnce(new Error(errorMessage));
-
-      renderWithRouter('/?page=1');
-
-      await waitFor(() => {
-        expect(screen.getByTestId('error')).toHaveTextContent(errorMessage);
-      });
     });
   });
 });

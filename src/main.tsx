@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Root from './routes/root.tsx';
+import Root from './routes/Root/root.tsx';
 import About from './routes/About/About.tsx';
 import ErrorPage from './routes/ErrorPage/ErrorPage.tsx';
 import NotFoundPage from './routes/NotFoundPage/NotFoundPage.tsx';

@@ -38,4 +38,20 @@ export const handlers = [
       results: [],
     });
   }),
+
+  http.get('https://rickandmortyapi.com/api/character/:id', ({ params }) => {
+    const { id } = params;
+
+    const character = characters.find((c) => c.id.toString() === id);
+
+    if (id === '500') {
+      return new HttpResponse(null, { status: 500 });
+    }
+
+    if (!character) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
+    return HttpResponse.json(character);
+  }),
 ];

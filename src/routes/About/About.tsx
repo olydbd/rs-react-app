@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function About() {
   return (
     <div className="flex items-center justify-center px-4 py-10 text-center">
-      <div className="w-full max-w-xl rounded-lg bg-white p-8 shadow-md">
+      <div className="w-full max-w-xl rounded-lg p-8 shadow-md">
         <h1 className="mb-4 text-2xl font-bold">About Me</h1>
         <p className="mb-4 text-gray-700">
           Hi! My name is <strong>Olya</strong>.{' '}
