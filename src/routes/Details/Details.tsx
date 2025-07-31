@@ -12,7 +12,7 @@ export default function Details() {
 
   const handleOverlayClick = () => {
     navigate({
-      pathname: '/characters',
+      pathname: '/',
       search: searchParams.toString(),
     });
   };
@@ -60,7 +60,7 @@ export default function Details() {
 
         <Link
           className="absolute right-0 bottom-0 p-5 text-[#BFDE42]"
-          to={{ pathname: '/characters', search: searchParams.toString() }}
+          to={{ pathname: '/', search: searchParams.toString() }}
         >
           Close
         </Link>
