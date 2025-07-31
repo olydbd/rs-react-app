@@ -8,7 +8,7 @@ import Pagination from '../../components/Pagination/Pagination';
 
 export default function Main() {
   const { characters, pages, page } = useLoaderData();
-  const [searchText, setSearchText] = useLocalStorage(SEARCH_KEY, '');
+  const [searchText, setSearchText] = useLocalStorage(SEARCH_KEY);
 
   const [, setSearchParams] = useSearchParams();
 
