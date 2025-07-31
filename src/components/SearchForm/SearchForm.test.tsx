@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Search from './Search';
+import SearchForm from './SearchForm';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import '@testing-library/jest-dom';
 
@@ -13,7 +13,7 @@ describe('Search Component', () => {
 
   describe('Rendering Tests', () => {
     it('renders search input and search button', () => {
-      render(<Search initialSearch="" onClick={fn} />);
+      render(<SearchForm initialSearch="" onClick={fn} />);
 
       const input = screen.getByPlaceholderText(/Search character/i);
       const button = screen.getByRole('button');
@@ -23,7 +23,7 @@ describe('Search Component', () => {
     });
 
     it('displays initialSearch value in input', () => {
-      render(<Search initialSearch="Rick" onClick={fn} />);
+      render(<SearchForm initialSearch="Rick" onClick={fn} />);
 
       const input = screen.getByPlaceholderText(
         /Search character/i,
@@ -35,7 +35,7 @@ describe('Search Component', () => {
 
   describe('User Interaction Tests', () => {
     it('updates input value when user types', async () => {
-      render(<Search initialSearch="" onClick={fn} />);
+      render(<SearchForm initialSearch="" onClick={fn} />);
       const input = screen.getByPlaceholderText(
         /Search character/i,
       ) as HTMLInputElement;
@@ -45,7 +45,7 @@ describe('Search Component', () => {
     });
 
     it('trims whitespace from search input', async () => {
-      render(<Search initialSearch="" onClick={fn} />);
+      render(<SearchForm initialSearch="" onClick={fn} />);
 
       const input = screen.getByPlaceholderText(
         /Search character/i,
@@ -59,7 +59,7 @@ describe('Search Component', () => {
     });
 
     it('triggers search callback with correct parameters', async () => {
-      render(<Search initialSearch="" onClick={fn} />);
+      render(<SearchForm initialSearch="" onClick={fn} />);
 
       const input = screen.getByPlaceholderText(
         /Search character/i,

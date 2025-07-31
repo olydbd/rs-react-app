@@ -7,7 +7,7 @@ import { SEARCH_KEY } from '../../utils/constants';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 
-vi.mock('../../components/Search/Search', () => ({
+vi.mock('../../components/SearchForm/SearchForm', () => ({
   default: ({
     initialSearch,
     onClick,
