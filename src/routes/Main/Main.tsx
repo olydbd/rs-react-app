@@ -1,4 +1,4 @@
-import Search from '../../components/Search/Search';
+import SearchForm from '../../components/SearchForm/SearchForm';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import CardList from '../../components/CardList/CardList';
 import { SEARCH_KEY } from '../../utils/constants';
@@ -8,7 +8,7 @@ import Pagination from '../../components/Pagination/Pagination';
 
 export default function Main() {
   const { characters, pages, page } = useLoaderData();
-  const [searchText, setSearchText] = useLocalStorage(SEARCH_KEY, '');
+  const [searchText, setSearchText] = useLocalStorage(SEARCH_KEY);
 
   const [, setSearchParams] = useSearchParams();
 
@@ -20,7 +20,7 @@ export default function Main() {
   return (
     <div className="relative">
       <div>
-        <Search initialSearch={searchText} onClick={handleSearch} />
+        <SearchForm initialSearch={searchText} onClick={handleSearch} />
         <ErrorBoundary>
           <CardList characters={characters} />
           {pages > 1 && <Pagination current={page} total={pages} />}
