@@ -11,7 +11,7 @@ export default function Root() {
     <>
       <ErrorBoundary>
         <Header />
-        <main className="relative mx-auto">
+        <main className="relative mx-auto min-h-screen bg-white transition-all duration-500 dark:bg-gray-900">
           {isNavigating && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/70">
               <Spinner />

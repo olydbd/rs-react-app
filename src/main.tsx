@@ -9,6 +9,7 @@ import NotFoundPage from './routes/NotFoundPage/NotFoundPage.tsx';
 import Main from './routes/Main/Main.tsx';
 import { detailsLoader, mainLoader } from './services/loaders.ts';
 import Details from './routes/Details/Details.tsx';
+import ThemeProvider from './components/contexts/theme/provider.tsx';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,8 @@ if (!root) {
 
 createRoot(root).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>,
 );

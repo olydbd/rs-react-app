@@ -13,7 +13,7 @@ export default function Card(props: Props) {
 
   return (
     <Link
-      className="mx-10 mt-16 flex flex-col rounded-lg bg-white shadow-xl sm:shrink-0 sm:grow sm:basis-0"
+      className="mx-10 mt-16 flex flex-col rounded-lg bg-white shadow-xl transition-all duration-500 sm:shrink-0 sm:grow sm:basis-0 dark:bg-gray-700"
       to={{
         pathname: `/characters/${id}`,
         search: searchParams.toString(),
@@ -21,21 +21,27 @@ export default function Card(props: Props) {
     >
       <img className="rounded-t-lg" src={image} alt="Character Image" />
       <div className="p-6">
-        <h5 className="mb-2 text-xl leading-tight font-medium">{name}</h5>
+        <h5 className="mb-2 text-xl leading-tight font-medium dark:text-white">
+          {name}
+        </h5>
         <div>
-          <p className="text-sm font-light">Last known location:</p>
-          <p className="mb-4 text-base">{location.name}</p>
+          <p className="text-sm font-light dark:text-gray-300">
+            Last known location:
+          </p>
+          <p className="mb-4 text-base dark:text-white">{location.name}</p>
         </div>
         <div>
-          <p className="text-sm font-light">Origin location:</p>
-          <p className="mb-4 text-base">{origin.name}</p>
+          <p className="text-sm font-light dark:text-gray-300">
+            Origin location:
+          </p>
+          <p className="mb-4 text-base dark:text-white">{origin.name}</p>
         </div>
       </div>
       <div className="mt-auto flex justify-between gap-1 px-6 py-3">
-        <div className="mb-1 rounded-full border border-transparent bg-[#42B4CA] px-2.5 py-1 text-center text-xs text-white shadow-sm transition-all">
+        <div className="mb-1 rounded-full border border-transparent bg-[#42B4CA] px-2.5 py-1 text-center text-xs text-white shadow-sm transition-all dark:bg-fuchsia-400">
           {status}
         </div>
-        <div className="mb-1 rounded-full border border-transparent bg-[#193840] px-2.5 py-1 text-center text-xs text-white shadow-sm transition-all">
+        <div className="mb-1 rounded-full border border-transparent bg-[#193840] px-2.5 py-1 text-center text-xs text-white shadow-sm transition-all dark:bg-fuchsia-600">
           {species}
         </div>
       </div>
