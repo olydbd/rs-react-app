@@ -61,6 +61,6 @@ describe('Details Component', () => {
     );
 
     const closeLink = screen.getByText(/Close/);
-    expect(closeLink).toHaveAttribute('href', '/characters?page=1&search=Rick');
+    expect(closeLink).toHaveAttribute('href', '/?page=1&search=Rick');
   });
 });

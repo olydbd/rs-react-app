@@ -10,17 +10,13 @@ function renderWithRouter(ui: ReactElement, route = '/?page=2') {
 }
 
 describe('Pagination Component', () => {
-  it('renders pagination with multiple pages', () => {
-    renderWithRouter(<Pagination current={2} total={5} />);
-
-    expect(screen.getByText('1')).toBeVisible();
-    expect(screen.getByText('2')).toBeVisible();
-    expect(screen.getByText('3')).toBeVisible();
-    expect(screen.getByText('4')).toBeVisible();
-    expect(screen.getByText('5')).toBeVisible();
-    expect(screen.getByText('→')).toBeVisible();
-    expect(screen.getByText('←')).toBeVisible();
-  });
+  it.each(['1', '2', '3', '4', '5', '→', '←'])(
+    'render pagination item %s',
+    (i) => {
+      renderWithRouter(<Pagination current={2} total={5} />);
+      expect(screen.getByText(i)).toBeVisible();
+    },
+  );
 
   it('disables prev arrow on first page', () => {
     renderWithRouter(<Pagination current={1} total={5} />);
@@ -34,7 +30,7 @@ describe('Pagination Component', () => {
     expect(next).toHaveClass('pointer-events-none');
   });
 
-  it('applies active class to current page', () => {
+  it('disables current page button', () => {
     renderWithRouter(<Pagination current={3} total={5} />);
     const currentPage = screen.getByText('3');
     expect(currentPage).toHaveClass('pointer-events-none');

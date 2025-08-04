@@ -12,7 +12,7 @@ export default function Details() {
 
   const handleOverlayClick = () => {
     navigate({
-      pathname: '/characters',
+      pathname: '/',
       search: searchParams.toString(),
     });
   };
@@ -25,14 +25,14 @@ export default function Details() {
     <div className="fixed inset-0 bg-black/40" onClick={handleOverlayClick}>
       <div
         onClick={handleModalClick}
-        className="animate-slide-in absolute top-0 right-0 h-full w-full overflow-y-auto bg-white p-6 shadow-xl md:w-1/3"
+        className="animate-slide-in absolute top-0 right-0 h-full w-full overflow-y-auto bg-white p-6 shadow-xl md:w-1/3 dark:bg-gray-700"
       >
         <img
           src={character.image}
           alt={character.name}
           className="mb-4 w-full rounded"
         />
-        <ul className="space-y-2">
+        <ul className="space-y-2 dark:text-white">
           <li>
             <strong>{character.name}</strong>
           </li>
@@ -59,8 +59,8 @@ export default function Details() {
         </ul>
 
         <Link
-          className="absolute right-0 bottom-0 p-5 text-[#BFDE42]"
-          to={{ pathname: '/characters', search: searchParams.toString() }}
+          className="absolute right-0 bottom-0 p-5 text-[#BFDE42] dark:text-fuchsia-300"
+          to={{ pathname: '/', search: searchParams.toString() }}
         >
           Close
         </Link>

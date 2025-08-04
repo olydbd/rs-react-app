@@ -1,14 +1,17 @@
-import Search from '../../components/Search/Search';
+import SearchForm from '../../components/SearchForm/SearchForm';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import CardList from '../../components/CardList/CardList';
 import { SEARCH_KEY } from '../../utils/constants';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { Outlet, useLoaderData, useSearchParams } from 'react-router-dom';
 import Pagination from '../../components/Pagination/Pagination';
+import Flyout from '../../features/selectedCards/Flyout';
+import { useAppSelector } from '../../app/hooks';
 
 export default function Main() {
   const { characters, pages, page } = useLoaderData();
-  const [searchText, setSearchText] = useLocalStorage(SEARCH_KEY, '');
+  const [searchText, setSearchText] = useLocalStorage(SEARCH_KEY);
+  const selectedCards = useAppSelector((state) => state.selectedCards.cards);
 
   const [, setSearchParams] = useSearchParams();
 
@@ -20,12 +23,14 @@ export default function Main() {
   return (
     <div className="relative">
       <div>
-        <Search initialSearch={searchText} onClick={handleSearch} />
+        <SearchForm initialSearch={searchText} onClick={handleSearch} />
         <ErrorBoundary>
           <CardList characters={characters} />
           {pages > 1 && <Pagination current={page} total={pages} />}
         </ErrorBoundary>
       </div>
+
+      {selectedCards.length > 0 && <Flyout />}
 
       <Outlet />
     </div>

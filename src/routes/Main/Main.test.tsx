@@ -6,8 +6,10 @@ import type { Character } from '../../utils/types';
 import { SEARCH_KEY } from '../../utils/constants';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../app/store';
 
-vi.mock('../../components/Search/Search', () => ({
+vi.mock('../../components/SearchForm/SearchForm', () => ({
   default: ({
     initialSearch,
     onClick,
@@ -71,11 +73,13 @@ describe('Main Component', () => {
 
   const renderWithRouter = (url = '/?page=1') => {
     return render(
-      <MemoryRouter initialEntries={[url]}>
-        <Routes>
-          <Route path="/" element={<Main />} />
-        </Routes>
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[url]}>
+          <Routes>
+            <Route path="/" element={<Main />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>,
     );
   };
 

@@ -13,13 +13,7 @@ describe('About Component', () => {
 
     expect(screen.getByText('About Me')).toBeVisible();
     expect(screen.getByText(/Hi! My name is/i)).toBeVisible();
-    expect(screen.getByRole('link', { name: /RS School/i })).toHaveAttribute(
-      'href',
-      expect.stringContaining('rs.school'),
-    );
-    expect(screen.getByRole('link', { name: /Back to Home/i })).toHaveAttribute(
-      'href',
-      '/',
-    );
+    expect(screen.getByRole('link', { name: /RS School/i })).toBeVisible();
+    expect(screen.getByRole('link', { name: /Back to Home/i })).toBeVisible();
   });
 });

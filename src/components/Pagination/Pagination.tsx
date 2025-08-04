@@ -31,10 +31,10 @@ export default function Pagination({ current, total }: Props) {
   const pages = [...head, ...body, ...tail];
 
   return (
-    <div className="my-4 flex justify-center gap-2">
+    <div className="my-4 flex justify-center gap-2 pb-4">
       <Link
         to={makePageLink(current - 1)}
-        className={`rounded px-3 py-1 transition ${current === 1 ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500'}`}
+        className={`rounded px-3 py-1 transition ${current === 1 ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500 dark:text-white'}`}
       >
         &larr;
       </Link>
@@ -45,7 +45,7 @@ export default function Pagination({ current, total }: Props) {
           <Link
             key={i}
             to={makePageLink(p)}
-            className={`rounded px-3 py-1 transition ${isActive ? 'pointer-events-none text-black' : 'text-gray-500 hover:text-black'}`}
+            className={`rounded px-3 py-1 transition ${isActive ? 'pointer-events-none text-black dark:text-white' : 'text-gray-500 hover:text-black hover:dark:text-white'}`}
           >
             {p}
           </Link>
@@ -54,7 +54,7 @@ export default function Pagination({ current, total }: Props) {
 
       <Link
         to={makePageLink(current + 1)}
-        className={`rounded px-3 py-1 transition ${current === total ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500'}`}
+        className={`rounded px-3 py-1 transition ${current === total ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500 dark:text-white'}`}
       >
         &rarr;
       </Link>
