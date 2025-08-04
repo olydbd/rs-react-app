@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { Character } from '../../utils/types';
 import type { RootState } from '../../app/store';
 
-interface SelectedCardsState {
+export interface SelectedCardsState {
   cards: Character[];
 }
 
