@@ -10,6 +10,8 @@ import Main from './routes/Main/Main.tsx';
 import { detailsLoader, mainLoader } from './services/loaders.ts';
 import Details from './routes/Details/Details.tsx';
 import ThemeProvider from './components/contexts/theme/provider.tsx';
+import { Provider } from 'react-redux';
+import { store } from './app/store.ts';
 
 const router = createBrowserRouter([
   {
@@ -54,8 +56,10 @@ if (!root) {
 
 createRoot(root).render(
   <StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   </StrictMode>,
 );

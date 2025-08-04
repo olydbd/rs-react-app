@@ -3,6 +3,8 @@ import Card from './Card';
 import { describe, it, expect } from 'vitest';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../app/store';
 
 const character = {
   id: 1,
@@ -28,9 +30,11 @@ describe('Card Component', () => {
   describe('Rendering Tests', () => {
     it('displays item name and description correctly', () => {
       render(
-        <MemoryRouter>
-          <Card character={character} />
-        </MemoryRouter>,
+        <Provider store={store}>
+          <MemoryRouter>
+            <Card character={character} />
+          </MemoryRouter>
+        </Provider>,
       );
 
       expect(screen.getByText('Rick Sanchez')).toBeVisible();
@@ -44,9 +48,11 @@ describe('Card Component', () => {
 
     it('handles missing props gracefully', () => {
       render(
-        <MemoryRouter>
-          <Card character={incompleteCharacter} />
-        </MemoryRouter>,
+        <Provider store={store}>
+          <MemoryRouter>
+            <Card character={incompleteCharacter} />
+          </MemoryRouter>
+        </Provider>,
       );
 
       expect(screen.getByText('Evil Morty')).toBeInTheDocument();

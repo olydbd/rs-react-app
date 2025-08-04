@@ -1,24 +1,42 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import type { Character } from '../../utils/types';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { toggleCard } from '../../features/selectedCards/selectedCardsSlice';
+import HeartCheckbox from '../ui/HeartCheckbox/HeartCheckbox';
 
 interface Props {
   character: Character;
 }
 
-export default function Card(props: Props) {
-  const { id, name, status, species, origin, location, image } =
-    props.character;
+export default function Card({ character }: Props) {
+  const { id, name, status, species, origin, location, image } = character;
 
   const [searchParams] = useSearchParams();
 
+  const selectedCards = useAppSelector((state) => state.selectedCards.cards);
+  const dispatch = useAppDispatch();
+
+  const isSelected = selectedCards.some((c) => c.id === id);
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+    dispatch(toggleCard(character));
+  };
+
   return (
     <Link
-      className="mx-10 mt-16 flex flex-col rounded-lg bg-white shadow-xl transition-all duration-500 sm:shrink-0 sm:grow sm:basis-0 dark:bg-gray-700"
+      className="relative mx-10 mt-16 flex flex-col rounded-lg bg-white shadow-xl transition-all duration-500 hover:shadow-md sm:shrink-0 sm:grow sm:basis-0 dark:bg-gray-700"
       to={{
         pathname: `/characters/${id}`,
         search: searchParams.toString(),
       }}
     >
+      <div
+        className="absolute top-3 right-3 cursor-pointer"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <HeartCheckbox checked={isSelected} onChange={handleCheckboxChange} />
+      </div>
       <img className="rounded-t-lg" src={image} alt="Character Image" />
       <div className="p-6">
         <h5 className="mb-2 text-xl leading-tight font-medium dark:text-white">
