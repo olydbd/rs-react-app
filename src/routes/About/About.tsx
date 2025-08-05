@@ -2,11 +2,15 @@ import { Link } from 'react-router-dom';
 
 export default function About() {
   return (
-    <div className="flex items-center justify-center px-4 py-10 text-center">
+    <div className="flex flex-col items-center px-4 text-center">
+      <div className="flex h-[25vh] items-center justify-center">
+        <h2 className="text-4xl font-bold text-[#42B4CA] dark:text-fuchsia-600">
+          About Me
+        </h2>
+      </div>
       <div className="w-full max-w-xl rounded-lg p-8 shadow-md dark:bg-gray-700">
-        <h1 className="mb-4 text-2xl font-bold dark:text-white">About Me</h1>
         <p className="mb-4 text-gray-700 dark:text-gray-300">
-          Hi! My name is <strong>Olya</strong>.{' '}
+          Hi! My name is <strong>Olya</strong>. I&apos;ve completed training at{' '}
           <a
             href="https://rs.school/courses/reactjs"
             target="_blank"
@@ -14,6 +18,15 @@ export default function About() {
             rel="noreferrer"
           >
             RS School
+          </a>
+          . You can view my work on{' '}
+          <a
+            href="https://github.com/olydbd"
+            target="_blank"
+            className="text-[#BFDE42] hover:underline dark:text-fuchsia-400"
+            rel="noreferrer"
+          >
+            GitHub
           </a>
           .
         </p>

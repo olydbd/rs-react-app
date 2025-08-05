@@ -1,9 +1,13 @@
+import pickleIcon from '../../../assets/images/pickle.png';
+
 export default function Spinner() {
   return (
-    <div
-      aria-label="Loading..."
+    <img
+      src={pickleIcon}
+      alt="Loading..."
       role="status"
-      className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+      aria-label="Loading..."
+      className="h-15 w-15 animate-spin"
     />
   );
 }

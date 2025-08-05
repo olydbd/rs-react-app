@@ -1,9 +1,4 @@
-import {
-  Link,
-  useLoaderData,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom';
+import { useLoaderData, useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function Details() {
   const character = useLoaderData();
@@ -57,13 +52,6 @@ export default function Details() {
             {character.origin?.name}
           </li>
         </ul>
-
-        <Link
-          className="absolute right-0 bottom-0 p-5 text-[#BFDE42] dark:text-fuchsia-300"
-          to={{ pathname: '/', search: searchParams.toString() }}
-        >
-          Close
-        </Link>
       </div>
     </div>
   );

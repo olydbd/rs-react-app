@@ -31,10 +31,10 @@ export default function Pagination({ current, total }: Props) {
   const pages = [...head, ...body, ...tail];
 
   return (
-    <div className="my-4 flex justify-center gap-2 pb-4">
+    <div className="my-4 flex justify-center pb-4">
       <Link
         to={makePageLink(current - 1)}
-        className={`rounded px-3 py-1 transition ${current === 1 ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500 dark:text-white'}`}
+        className={`rounded px-2 py-1 transition ${current === 1 ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500 dark:text-white'}`}
       >
         &larr;
       </Link>
@@ -54,7 +54,7 @@ export default function Pagination({ current, total }: Props) {
 
       <Link
         to={makePageLink(current + 1)}
-        className={`rounded px-3 py-1 transition ${current === total ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500 dark:text-white'}`}
+        className={`rounded px-2 py-1 transition ${current === total ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500 dark:text-white'}`}
       >
         &rarr;
       </Link>

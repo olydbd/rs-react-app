@@ -22,7 +22,7 @@ export default function Main() {
 
   return (
     <div className="relative">
-      <div>
+      <div className="px-5 pt-15">
         <SearchForm initialSearch={searchText} onClick={handleSearch} />
         <ErrorBoundary>
           <CardList characters={characters} />

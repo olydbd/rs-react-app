@@ -52,15 +52,4 @@ describe('Details Component', () => {
       expect.stringContaining('rickandmortyapi'),
     );
   });
-
-  it('has a working close link', () => {
-    render(
-      <MemoryRouter>
-        <Details />
-      </MemoryRouter>,
-    );
-
-    const closeLink = screen.getByText(/Close/);
-    expect(closeLink).toHaveAttribute('href', '/?page=1&search=Rick');
-  });
 });
