@@ -7,7 +7,7 @@ import useTheme from '../../hooks/useTheme';
 export default function Header() {
   const { theme, setTheme } = useTheme();
   return (
-    <header className="relative h-[75vh] w-full bg-[url('src/assets/images/background-light.jpg')] bg-cover bg-center transition-all duration-500 dark:bg-gray-900 dark:bg-[url('src/assets/images/background-dark.jpg')]">
+    <header className="relative h-[75vh] w-full bg-[url('background-light.jpg')] bg-cover bg-center transition-all duration-500 dark:bg-gray-900 dark:bg-[url('background-dark.jpg')]">
       <div className="absolute inset-0 bg-white/40 dark:bg-gray-900/50" />
       <div className="relative flex h-full flex-col items-center justify-center px-10 py-20">
         <img src={logo} alt="Rick and Morty Logo" className="w-2xl" />
