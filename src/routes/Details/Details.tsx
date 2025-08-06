@@ -28,29 +28,58 @@ export default function Details() {
           className="mb-4 w-full rounded"
         />
         <ul className="space-y-2 dark:text-white">
-          <li>
-            <strong>{character.name}</strong>
+          <li className="text-xl">
+            <strong>Galactic Registry — Citadel of Ricks</strong>
           </li>
           <li>
-            <strong>Status: </strong>
-            {character.status}
+            <strong>Subject: </strong> {character.name}
           </li>
           <li>
-            <strong>Species: </strong>
-            {character.species}
+            <strong>Species: </strong> {character.species}
           </li>
           <li>
-            <strong>Gender: </strong>
-            {character.gender}
+            <strong>Gender: </strong> {character.gender}
           </li>
           <li>
-            <strong>Location: </strong>
-            {character.location?.name}
+            <strong>Status: </strong> {character.status}
           </li>
           <li>
-            <strong>Origin: </strong>
-            {character.origin?.name}
+            <strong>Last Known Location: </strong>{' '}
+            {character.location.name !== 'unknown'
+              ? character.location.name
+              : 'Location data is currently unavailable.'}
           </li>
+          <li>
+            <strong>Origin: </strong>{' '}
+            {character.origin.name !== 'unknown'
+              ? character.origin.name
+              : 'Origin details remain unverified or classified.'}
+          </li>
+          <li>
+            <strong>Notes:</strong>{' '}
+            {`Subject exhibits typical behavior for species ${character.species}, with no exceptional traits reported. Current status ${character.status !== 'unknown' ? 'confirmed' : 'currently unverified or unknown'}, though subject's survival beyond this report is subject to cosmic probability and/or Rick-level chaos.`}
+          </li>
+          <li>
+            {character.origin.name !== 'unknown' ? (
+              <>
+                Origin details have been recorded as{' '}
+                <strong>{character.origin.name}</strong>.
+              </>
+            ) : (
+              <>Origin details remain unverified or classified.</>
+            )}
+          </li>
+          <li>
+            {character.location.name !== 'unknown' ? (
+              <>
+                Last known location is documented as{' '}
+                <strong>{character.location.name}</strong>.
+              </>
+            ) : (
+              <>Location data is currently unavailable.</>
+            )}
+          </li>
+          <li>Monitoring continues.</li>
         </ul>
       </div>
     </div>

@@ -36,7 +36,7 @@ export default function Pagination({ current, total }: Props) {
         to={makePageLink(current - 1)}
         className={`rounded px-2 py-1 transition ${current === 1 ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500 dark:text-white'}`}
       >
-        &larr;
+        &#60;
       </Link>
       {pages.map((p, i) => {
         const isActive = current === p || p === '...';
@@ -56,7 +56,7 @@ export default function Pagination({ current, total }: Props) {
         to={makePageLink(current + 1)}
         className={`rounded px-2 py-1 transition ${current === total ? 'pointer-events-none text-gray-500' : 'text-black hover:text-gray-500 dark:text-white'}`}
       >
-        &rarr;
+        &#62;
       </Link>
     </div>
   );

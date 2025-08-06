@@ -40,13 +40,13 @@ describe('Details Component', () => {
     expect(screen.getByText(/Status:/)).toBeInTheDocument();
     expect(screen.getByText(/Alive/)).toBeInTheDocument();
     expect(screen.getByText(/Species:/)).toBeInTheDocument();
-    expect(screen.getByText(/Human/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Human/)[0]).toBeInTheDocument();
     expect(screen.getByText(/Gender:/)).toBeInTheDocument();
     expect(screen.getByText(/Male/)).toBeInTheDocument();
     expect(screen.getByText(/Location:/)).toBeInTheDocument();
-    expect(screen.getByText(/Citadel of Ricks/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Citadel of Ricks/)[0]).toBeInTheDocument();
     expect(screen.getByText(/Origin:/)).toBeInTheDocument();
-    expect(screen.getByText(/Earth \(C-137\)/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Earth \(C-137\)/)[0]).toBeInTheDocument();
     expect(screen.getByRole('img')).toHaveAttribute(
       'src',
       expect.stringContaining('rickandmortyapi'),

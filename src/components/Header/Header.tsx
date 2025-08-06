@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className="relative h-[75vh] w-full bg-[url('/background-light.jpg')] bg-cover bg-center transition-all duration-500 dark:bg-gray-900 dark:bg-[url('/background-dark.jpg')]">
       <div className="absolute inset-0 bg-white/30 dark:bg-gray-900/50" />
-      <div className="relative flex h-full items-start justify-end gap-10 p-10">
+      <div className="relative flex h-full items-start justify-end gap-3 p-13 sm:gap-10">
         <Link
           to="/"
           className="animate-bounce rounded-full bg-[#42B4CA] px-5 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#1196aa] dark:bg-fuchsia-400 hover:dark:bg-fuchsia-600"
