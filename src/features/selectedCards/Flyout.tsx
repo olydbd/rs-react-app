@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { removeAllCards } from './selectedCardsSlice';
-import downloadDataCsv from './downloadDataCsv';
+import downloadCharactersCsv from './downloadCharactersCsv';
 
 export default function Flyout() {
   const selectedCards = useAppSelector((state) => state.selectedCards.cards);
@@ -18,7 +18,7 @@ export default function Flyout() {
       </div>
       <div className="flex flex-wrap gap-2 p-2">
         <button
-          onClick={() => downloadDataCsv(selectedCards, downloadLinkRef)}
+          onClick={() => downloadCharactersCsv(selectedCards, downloadLinkRef)}
           className="cursor-pointer rounded-full bg-[#01859f] px-4 py-2 text-white transition-all duration-500 hover:bg-[#006e84] dark:bg-fuchsia-400 hover:dark:bg-fuchsia-600"
         >
           Download

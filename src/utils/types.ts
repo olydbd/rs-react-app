@@ -1,4 +1,4 @@
-export interface Character {
+export interface Character extends Record<string, unknown> {
   id: number;
   name: string;
   status: string;
