@@ -37,7 +37,11 @@ export default function Card({ character }: Props) {
       >
         <HeartCheckbox checked={isSelected} onChange={handleCheckboxChange} />
       </div>
-      <img className="rounded-t-lg" src={image} alt="Character Image" />
+      <img
+        className="aspect-square w-full overflow-hidden rounded-t-lg bg-gray-200 dark:bg-gray-600"
+        src={image}
+        alt="Character Image"
+      />
       <div className="p-6">
         <h5 className="mb-2 text-xl leading-tight font-medium dark:text-white">
           {name}

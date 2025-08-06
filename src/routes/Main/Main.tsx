@@ -7,6 +7,7 @@ import { Outlet, useLoaderData, useSearchParams } from 'react-router-dom';
 import Pagination from '../../components/Pagination/Pagination';
 import Flyout from '../../features/selectedCards/Flyout';
 import { useAppSelector } from '../../app/hooks';
+import Title from '../../components/Title/Title';
 
 export default function Main() {
   const { characters, pages, page } = useLoaderData();
@@ -22,7 +23,8 @@ export default function Main() {
 
   return (
     <div className="relative">
-      <div className="px-5 pt-15">
+      <div className="px-5">
+        <Title text="Search Characters" />
         <SearchForm initialSearch={searchText} onClick={handleSearch} />
         <ErrorBoundary>
           <CardList characters={characters} />
