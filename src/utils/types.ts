@@ -3,6 +3,7 @@ export interface Character extends Record<string, unknown> {
   name: string;
   status: string;
   species: string;
+  gender: string;
   origin: {
     name: string;
     url: string;
@@ -12,4 +13,11 @@ export interface Character extends Record<string, unknown> {
     url: string;
   };
   image: string;
+}
+
+export interface CharactersResponse {
+  info: {
+    pages: number;
+  };
+  results: Character[];
 }
