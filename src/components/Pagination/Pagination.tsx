@@ -10,6 +10,8 @@ interface Props {
 export default function Pagination({ current, total }: Props) {
   const [searchParams] = useSearchParams();
 
+  if (total < 2) return null;
+
   const makePageLink = (page: string | number) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set('page', page.toString());
