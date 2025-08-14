@@ -33,7 +33,7 @@ export default function Main() {
         <Title text="Search Characters" />
         <SearchForm initialSearch={searchText} onClick={handleSearch} />
         <div className="flex items-center justify-center pt-10">
-          <Button onClick={() => refetch()}>Refresh</Button>
+          <Button onClick={refetch}>Refresh ↻</Button>
         </div>
         <ErrorBoundary>
           {isFetching && (
@@ -54,9 +54,7 @@ export default function Main() {
           {data?.results && (
             <>
               <CardList characters={data.results} />
-              {data.pages > 1 && (
-                <Pagination current={page} total={data.pages} />
-              )}
+              <Pagination current={page} total={data.pages} />
             </>
           )}
         </ErrorBoundary>
