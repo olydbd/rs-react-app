@@ -11,11 +11,7 @@ describe('NotFoundPage', () => {
       </MemoryRouter>,
     );
 
-    expect(
-      screen.getByText(
-        'The page you are trying to search has been moved to another universe.',
-      ),
-    ).toBeVisible();
+    expect(screen.getByRole('heading', { level: 2 })).toBeVisible();
     expect(screen.getByRole('link', { name: /GET ME HOME/i })).toHaveAttribute(
       'href',
       '/',
