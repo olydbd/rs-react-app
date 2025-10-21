@@ -50,6 +50,22 @@ A web application for browsing characters from the Rick and Morty universe. Incl
    npm run dev
    ```
 
+## 🔁 Available Scripts
+
+The following scripts are available in the project and can be run using `npm run <script>`:
+
+| Script          | Description                                              |
+| --------------- | -------------------------------------------------------- |
+| `dev`           | Starts Vite for development.                             |
+| `build`         | Builds the project for production using Vite.            |
+| `lint`          | Runs ESLint to check for linting errors.                 |
+| `lint:fix`      | Runs ESLint and automatically fixes fixable issues.      |
+| `format:fix`    | Formats files using Prettier.                            |
+| `preview`       | Previews the project using Vite.                         |
+| `prepare`       | Installs Husky in the project directory.                 |
+| `test`          | Runs tests using Vitest.                                 |
+| `test:coverage` | Runs tests and generates a coverage report using Vitest. |
+
 ## 🌐 API
 
 Data is fetched from the open [Rick and Morty API](https://rickandmortyapi.com/)
