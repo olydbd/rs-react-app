@@ -60,7 +60,7 @@ describe('CardList Component', () => {
 
     it("displays 'no results' message when data array is empty", () => {
       render(<CardList characters={[]} />);
-      expect(screen.getByText('No character was found :(')).toBeVisible();
+      expect(screen.getByText('No character was found')).toBeVisible();
     });
   });
 
