@@ -1,7 +1,6 @@
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useGetCharacterByIdQuery } from '../../services/character';
 import Spinner from '../../components/ui/Spinner/Spinner';
-import Button from '../../components/ui/Button/Button';
 import CardDetails from '../../components/CardDetails/CardDetails';
 
 export default function Details() {
@@ -11,8 +10,7 @@ export default function Details() {
 
   if (!characterId) throw new Error('Character ID is missing');
 
-  const { data, isError, isLoading, refetch } =
-    useGetCharacterByIdQuery(characterId);
+  const { data, isError, isLoading } = useGetCharacterByIdQuery(characterId);
 
   const handleOverlayClick = () => {
     navigate({
@@ -42,9 +40,6 @@ export default function Details() {
           </div>
         )}
         {data && <CardDetails data={data} />}
-        <div className="flex items-center justify-center pt-10">
-          <Button onClick={refetch}>Refresh ↻</Button>
-        </div>
       </div>
     </div>
   );

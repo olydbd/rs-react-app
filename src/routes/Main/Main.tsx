@@ -10,7 +10,6 @@ import { useAppSelector } from '../../app/hooks';
 import Title from '../../components/Title/Title';
 import { useGetCharactersQuery } from '../../services/character';
 import Spinner from '../../components/ui/Spinner/Spinner';
-import Button from '../../components/ui/Button/Button';
 
 export default function Main() {
   const [searchText, setSearchText] = useLocalStorage(SEARCH_KEY);
@@ -19,8 +18,10 @@ export default function Main() {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search') || '';
   const page = parseInt(searchParams.get('page') || '1', 10);
-  const { data, isError, isLoading, isFetching, refetch } =
-    useGetCharactersQuery({ searchText: search, page });
+  const { data, isError, isLoading, isFetching } = useGetCharactersQuery({
+    searchText: search,
+    page,
+  });
 
   const handleSearch = (search: string) => {
     setSearchText(search);
@@ -32,9 +33,6 @@ export default function Main() {
       <div className="px-5">
         <Title text="Search Characters" />
         <SearchForm initialSearch={searchText} onClick={handleSearch} />
-        <div className="flex items-center justify-center pt-10">
-          <Button onClick={refetch}>Refresh ↻</Button>
-        </div>
         <ErrorBoundary>
           {isFetching && (
             <div className="absolute top-0 right-0 z-50 h-full w-full bg-white/50 dark:bg-black/50" />
