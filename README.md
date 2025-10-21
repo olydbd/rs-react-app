@@ -6,12 +6,16 @@ A web application for browsing characters from the Rick and Morty universe. Incl
 
 ## ⚙️ Tech Stack
 
-- React
-- TypeScript
-- React Router
-- Redux Toolkit
-- RTK Query
-- Tailwind CSS
+| Technology                | Badge                                                                                                                   |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **React**                 | ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)                              |
+| **TypeScript**            | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)                           |
+| **React Router**          | ![React Router](https://img.shields.io/badge/React_Router-CA4245?logo=react-router&logoColor=white)                     |
+| **Redux Toolkit**         | ![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-764ABC?logo=redux&logoColor=white)                          |
+| **RTK Query**             | ![RTK Query](https://img.shields.io/badge/RTK_Query-764ABC?logo=redux&logoColor=white)                                  |
+| **Tailwind CSS**          | ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)                       |
+| **React Testing Library** | ![React Testing Library](https://img.shields.io/badge/React_Testing_Library-E33332?logo=testinglibrary&logoColor=white) |
+| **Vitest**                | ![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)                                       |
 
 ## ✨ Features
 
