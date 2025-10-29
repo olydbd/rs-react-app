@@ -16,6 +16,7 @@ const characters: Character[] = [
     name: 'Rick Sanchez',
     status: 'Alive',
     species: 'Human',
+    gender: 'Male',
     origin: { name: '', url: '' },
     location: { name: '', url: '' },
     image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
@@ -25,6 +26,7 @@ const characters: Character[] = [
     name: 'Black Rick',
     status: 'Alive',
     species: 'Human',
+    gender: 'Male',
     origin: { name: '', url: '' },
     location: { name: '', url: '' },
     image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
@@ -37,6 +39,7 @@ const emptyCharacters: Character[] = [
     name: '',
     status: '',
     species: '',
+    gender: '',
     origin: { name: '', url: '' },
     location: { name: '', url: '' },
     image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
@@ -57,7 +60,7 @@ describe('CardList Component', () => {
 
     it("displays 'no results' message when data array is empty", () => {
       render(<CardList characters={[]} />);
-      expect(screen.getByText('No character was found :(')).toBeVisible();
+      expect(screen.getByText('No character was found')).toBeVisible();
     });
   });
 

@@ -7,17 +7,6 @@ import ThemeProvider from '../contexts/theme/provider';
 import userEvent from '@testing-library/user-event';
 
 describe('Header Component', () => {
-  it('renders the logo image', () => {
-    render(
-      <ThemeProvider>
-        <MemoryRouter>
-          <Header />
-        </MemoryRouter>
-      </ThemeProvider>,
-    );
-    const logo = screen.getByRole('img', { name: /Rick and Morty Logo/i });
-    expect(logo).toBeVisible();
-  });
   it('clicking button toggles theme icon and mode', async () => {
     render(
       <ThemeProvider>

@@ -1,11 +1,17 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  vi,
+  type MockedFunction,
+} from 'vitest';
 import Main from './Main';
 import '@testing-library/jest-dom';
 import type { Character } from '../../utils/types';
 import { SEARCH_KEY } from '../../utils/constants';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { useLoaderData } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../app/store';
 
@@ -36,34 +42,38 @@ vi.mock('../../components/CardList/CardList', () => ({
   ),
 }));
 
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
+vi.mock('../../services/character', async () => {
+  const actual = await vi.importActual('../../services/character');
   return {
     ...actual,
-    useLoaderData: vi.fn(),
+    useGetCharactersQuery: vi.fn().mockReturnValue({
+      data: {
+        results: [
+          {
+            id: 1,
+            name: 'Rick Sanchez',
+            status: 'Alive',
+            species: 'Human',
+            gender: 'Male',
+            origin: { name: '', url: '' },
+            location: { name: '', url: '' },
+            image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+          },
+        ],
+        pages: 1,
+      },
+      isError: false,
+      isLoading: false,
+      isFetching: false,
+      refetch: vi.fn(),
+    }),
   };
 });
 
-const characters: Character[] = [
-  {
-    id: 1,
-    name: 'Rick Sanchez',
-    status: 'Alive',
-    species: 'Human',
-    origin: { name: '', url: '' },
-    location: { name: '', url: '' },
-    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-  },
-  {
-    id: 2,
-    name: 'Black Rick',
-    status: 'Alive',
-    species: 'Human',
-    origin: { name: '', url: '' },
-    location: { name: '', url: '' },
-    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-  },
-];
+const { useGetCharactersQuery } = await import('../../services/character');
+const mockedUseGetCharactersQuery = useGetCharactersQuery as MockedFunction<
+  typeof useGetCharactersQuery
+>;
 
 describe('Main Component', () => {
   beforeEach(() => {
@@ -71,7 +81,7 @@ describe('Main Component', () => {
     vi.clearAllMocks();
   });
 
-  const renderWithRouter = (url = '/?page=1') => {
+  const renderComponent = (url = '/?page=1') => {
     return render(
       <Provider store={store}>
         <MemoryRouter initialEntries={[url]}>
@@ -83,31 +93,45 @@ describe('Main Component', () => {
     );
   };
 
-  describe('Integration Tests', () => {
-    it('loads characters from loader and shows them', () => {
-      (useLoaderData as ReturnType<typeof vi.fn>).mockReturnValue({
-        characters,
-        pages: 1,
-        page: 1,
-      });
+  it('display the title', () => {
+    renderComponent();
+    expect(screen.getByText(/search characters/i)).toBeVisible();
+  });
 
-      renderWithRouter();
+  it('reads initial search value from localStorage', () => {
+    localStorage.setItem(SEARCH_KEY, 'Rick');
+    renderComponent();
+    expect(screen.getByTestId('search-input')).toHaveValue('Rick');
+  });
 
-      expect(screen.getByText('Rick Sanchez')).toBeVisible();
+  it('renders characters from CardList', () => {
+    renderComponent();
+    expect(screen.getByText('Rick Sanchez')).toBeVisible();
+  });
+
+  it('shows spinner during loading', () => {
+    mockedUseGetCharactersQuery.mockReturnValueOnce({
+      data: undefined,
+      isError: false,
+      isLoading: true,
+      isFetching: false,
+      refetch: vi.fn(),
     });
 
-    it('reads search from localStorage', async () => {
-      localStorage.setItem(SEARCH_KEY, 'Rick');
+    renderComponent();
+    expect(screen.getByRole('status')).toBeVisible();
+  });
 
-      (useLoaderData as ReturnType<typeof vi.fn>).mockReturnValue({
-        characters,
-        pages: 1,
-        page: 1,
-      });
-
-      renderWithRouter();
-
-      expect(screen.getByTestId('search-input')).toHaveValue('Rick');
+  it('shows error message on fetch error', () => {
+    mockedUseGetCharactersQuery.mockReturnValueOnce({
+      data: undefined,
+      isError: true,
+      isLoading: false,
+      isFetching: false,
+      refetch: vi.fn(),
     });
+
+    renderComponent();
+    expect(screen.getByText(/failed to load characters/i)).toBeVisible();
   });
 });

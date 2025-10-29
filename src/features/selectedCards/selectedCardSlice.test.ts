@@ -14,6 +14,7 @@ const character = {
   name: 'Rick Sanchez',
   status: 'Alive',
   species: 'Human',
+  gender: 'Male',
   origin: { name: 'Earth (C-137)', url: '' },
   location: { name: 'Citadel of Ricks', url: '' },
   image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',

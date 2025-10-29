@@ -1,23 +1,22 @@
 import type { RefObject } from 'react';
-import type { Character } from '../../utils/types';
 
-export default function downloadDataCsv(
-  data: Character[],
+export function downloadDataCsv(
+  data: Record<string, unknown>[],
   link: RefObject<HTMLAnchorElement | null>,
+  columns: Record<string, string>[],
+  format: (d: unknown[]) => string,
 ) {
   const csvString = [
-    ['Name', 'Status', 'Species'],
-    ...data.map((c) => [c.name, c.status, c.species]),
+    columns.map((c) => Object.values(c)[0]),
+    ...data.map((d) => columns.map((c) => d[Object.keys(c)[0]] ?? '')),
   ]
     .map((row) => row.join(','))
     .join('\n');
-
   const blob = new Blob([csvString], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
-
   if (link.current) {
     link.current.href = url;
-    link.current.download = `${data.length}_items.csv`;
+    link.current.download = format(data);
     link.current.click();
     URL.revokeObjectURL(url);
   }

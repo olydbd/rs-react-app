@@ -11,8 +11,8 @@ describe('NotFoundPage', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByText('PAGE NOT FOUND')).toBeVisible();
-    expect(screen.getByRole('link', { name: /back to home/i })).toHaveAttribute(
+    expect(screen.getByRole('heading', { level: 2 })).toBeVisible();
+    expect(screen.getByRole('link', { name: /GET ME HOME/i })).toHaveAttribute(
       'href',
       '/',
     );

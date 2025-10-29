@@ -7,7 +7,6 @@ import About from './routes/About/About.tsx';
 import ErrorPage from './routes/ErrorPage/ErrorPage.tsx';
 import NotFoundPage from './routes/NotFoundPage/NotFoundPage.tsx';
 import Main from './routes/Main/Main.tsx';
-import { detailsLoader, mainLoader } from './services/loaders.ts';
 import Details from './routes/Details/Details.tsx';
 import ThemeProvider from './components/contexts/theme/provider.tsx';
 import { Provider } from 'react-redux';
@@ -22,17 +21,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Main />,
-        loader: mainLoader,
       },
       {
         path: 'characters',
         element: <Main />,
-        loader: mainLoader,
         children: [
           {
             path: ':characterId',
             element: <Details />,
-            loader: detailsLoader,
           },
         ],
       },

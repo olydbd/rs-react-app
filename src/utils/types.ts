@@ -1,8 +1,9 @@
-export interface Character {
+export interface Character extends Record<string, unknown> {
   id: number;
   name: string;
   status: string;
   species: string;
+  gender: string;
   origin: {
     name: string;
     url: string;
@@ -12,4 +13,11 @@ export interface Character {
     url: string;
   };
   image: string;
+}
+
+export interface CharactersResponse {
+  info: {
+    pages: number;
+  };
+  results: Character[];
 }

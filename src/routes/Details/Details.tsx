@@ -1,14 +1,16 @@
-import {
-  Link,
-  useLoaderData,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useGetCharacterByIdQuery } from '../../services/character';
+import Spinner from '../../components/ui/Spinner/Spinner';
+import CardDetails from '../../components/CardDetails/CardDetails';
 
 export default function Details() {
-  const character = useLoaderData();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { characterId } = useParams();
+
+  if (!characterId) throw new Error('Character ID is missing');
+
+  const { data, isError, isLoading } = useGetCharacterByIdQuery(characterId);
 
   const handleOverlayClick = () => {
     navigate({
@@ -27,43 +29,17 @@ export default function Details() {
         onClick={handleModalClick}
         className="animate-slide-in absolute top-0 right-0 h-full w-full overflow-y-auto bg-white p-6 shadow-xl md:w-1/3 dark:bg-gray-700"
       >
-        <img
-          src={character.image}
-          alt={character.name}
-          className="mb-4 w-full rounded"
-        />
-        <ul className="space-y-2 dark:text-white">
-          <li>
-            <strong>{character.name}</strong>
-          </li>
-          <li>
-            <strong>Status: </strong>
-            {character.status}
-          </li>
-          <li>
-            <strong>Species: </strong>
-            {character.species}
-          </li>
-          <li>
-            <strong>Gender: </strong>
-            {character.gender}
-          </li>
-          <li>
-            <strong>Location: </strong>
-            {character.location?.name}
-          </li>
-          <li>
-            <strong>Origin: </strong>
-            {character.origin?.name}
-          </li>
-        </ul>
-
-        <Link
-          className="absolute right-0 bottom-0 p-5 text-[#BFDE42] dark:text-fuchsia-300"
-          to={{ pathname: '/', search: searchParams.toString() }}
-        >
-          Close
-        </Link>
+        {isLoading && (
+          <div className="flex h-full items-center justify-center">
+            <Spinner />
+          </div>
+        )}
+        {isError && (
+          <div className="flex h-full items-center justify-center">
+            <p className="font-bold text-red-500">Error occurred</p>
+          </div>
+        )}
+        {data && <CardDetails data={data} />}
       </div>
     </div>
   );

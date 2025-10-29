@@ -9,7 +9,7 @@ export default function ErrorFallback(props: Props) {
   return (
     <div className="flex h-screen w-screen items-center justify-center dark:bg-gray-900">
       <div className="text-center">
-        <h2 className="dark:text-white">Something went wrong</h2>
+        <h2 className="uppercase dark:text-white">Something went wrong</h2>
         <p className="py-5 font-bold dark:text-white">
           {error?.message || 'Unknown error occurred'}
         </p>

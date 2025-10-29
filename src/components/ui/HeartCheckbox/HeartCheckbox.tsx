@@ -12,7 +12,7 @@ export default function HeartCheckbox(props: HeartCheckboxProps) {
         {...props}
       />
       <svg
-        className="pointer-events-none absolute mt-1 h-6 w-6 fill-none stroke-white peer-checked:!fill-red-500 dark:stroke-gray-900 dark:peer-checked:!fill-red-700"
+        className="pointer-events-none absolute mt-1 h-6 w-6 fill-none stroke-white drop-shadow-md peer-checked:!fill-red-500 dark:stroke-gray-900 dark:peer-checked:!fill-red-700"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
